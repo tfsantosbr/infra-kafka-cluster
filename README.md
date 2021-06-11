@@ -22,45 +22,45 @@ Abaixos comandos para interagir com o cluster Kafka rodando em Docker
 # Docker
 
     # Entrar em um dos nós do cluster Kafka:
-    docker-compose exec kafka-1 sh
+    docker-compose exec kafka sh
 
 # Tópicos
 
     # Listar tópicos
-    kafka-topics --list --bootstrap-server kafka1:19091
+    kafka-topics --list --bootstrap-server kafka:9092
 
     # Criar um tópico no Kafka
-    kafka-topics --create --replication-factor 3 --partitions 3 --topic meutopico --bootstrap-server kafka1:19091 
+    kafka-topics --create --replication-factor 1 --partitions 1 --topic meutopico --bootstrap-server kafka:9092 
 
     # Descrever tópico
-    kafka-topics --describe --topic meutopico --bootstrap-server kafka1:19091
+    kafka-topics --describe --topic meutopico --bootstrap-server kafka:9092
 
     # Listar tópicos
-    kafka-topics --list --bootstrap-server kafka1:19091
+    kafka-topics --list --bootstrap-server kafka:9092
 
     # Alterar Partições de um Tópico
-    kafka-topics --alter --bootstrap-server kafka1:19091 --topic orders-order-created --partitions 10
+    kafka-topics --alter --bootstrap-server kafka:9092 --topic orders-order-created --partitions 10
 
     # Deletar Topico
-    kafka-topics --bootstrap-server kafka1:19091 --delete --topic someTopic
+    kafka-topics --bootstrap-server kafka:9092 --delete --topic someTopic
 
 # Producer
 
     # Iniciar um produtor de mensagens
-    kafka-console-producer --broker-list kafka1:19091 --topic meutopico
+    kafka-console-producer --broker-list kafka:9092 --topic meutopico
 
 # Consumer
 
     # Iniciar um consumer de mensagens
-    kafka-console-consumer --bootstrap-server kafka1:19091 --topic meutopico
+    kafka-console-consumer --bootstrap-server kafka:9092 --topic meutopico
 
     # Ler as mensagens desde o início
-    kafka-console-consumer --bootstrap-server kafka1:19091 --topic meutopico --from-beginning
+    kafka-console-consumer --bootstrap-server kafka:9092 --topic meutopico --from-beginning
 
     # Especificando um grupo para escalar os consumers. Dica: Executar em pelo menos uns 3 consumers para testar a escalabilidade.
-    kafka-console-consumer --bootstrap-server kafka1:19091 --topic meutopico --group a
+    kafka-console-consumer --bootstrap-server kafka:9092 --topic meutopico --group a
 
     # Descrever um grupo de consumidores:
-    kafka-consumer-groups --group a --bootstrap-server kafka1:19091 --describe
+    kafka-consumer-groups --group a --bootstrap-server kafka:9092 --describe
 
 ```
